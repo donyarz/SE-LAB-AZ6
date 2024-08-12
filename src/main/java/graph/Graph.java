@@ -1,5 +1,6 @@
 package graph;
 
+import javafx.util.Pair;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -28,10 +29,10 @@ public class Graph {
         nodes.add(new Pair<Node, Integer>(s, 0));
         while (!nodes.isEmpty()) {
             Pair<Node, Integer> front = nodes.poll();
-            Node frontNode = front.getValue0();
+            Node frontNode = front.getKey();
             if (!frontNode.isVisited()) {
                 frontNode.setVisited(true);
-                int distance = front.getValue1();
+                int distance = front.getValue();
                 frontNode.setDistance(distance);
                 nodes.addAll(frontNode.getAvailableNeighbors()
                         .stream()
@@ -48,10 +49,10 @@ public class Graph {
         nodes.add(new Pair<Integer, Node>(0, s));
         while (!nodes.isEmpty()) {
             Pair<Integer, Node> front = nodes.poll();
-            Node frontNode = front.getValue1();
+            Node frontNode = front.getValue();
             if (!frontNode.isVisited()) {
                 frontNode.setVisited(true);
-                int distance = front.getValue0();
+                int distance = front.getKey();
                 frontNode.setDistance(distance);
                 nodes.addAll(frontNode.getAvailableWeightedNeighbors()
                         .stream()
