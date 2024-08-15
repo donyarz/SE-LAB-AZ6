@@ -2,9 +2,11 @@ package graph.traveling;
 
 import graph.Graph;
 import graph.Node;
+import lombok.Getter;
 
 public class TrainTravelStrategy implements TravelStrategy {
     private Graph graph;
+    @Getter
     private int trainUnitTime;
 
     public TrainTravelStrategy(Graph graph) {

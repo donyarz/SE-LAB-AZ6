@@ -23,8 +23,6 @@ public class Graph {
     }
 
     public void bfs(Node s) {
-        this.resetVisits();
-
         Queue<Pair<Node, Integer>> nodes = new LinkedList<>();
         nodes.add(new Pair<Node, Integer>(s, 0));
         while (!nodes.isEmpty()) {
@@ -40,11 +38,10 @@ public class Graph {
                         .collect(Collectors.toCollection(ArrayList::new)));
             }
         }
+        this.resetVisits();
     }
 
     public void dijkstra(Node s) {
-        this.resetVisits();
-
         PriorityQueue<Pair<Integer, Node>> nodes = new PriorityQueue<>();
         nodes.add(new Pair<Integer, Node>(0, s));
         while (!nodes.isEmpty()) {
@@ -61,6 +58,7 @@ public class Graph {
                         .collect(Collectors.toCollection(PriorityQueue::new)));
             }
         }
+        this.resetVisits();
     }
 
 }

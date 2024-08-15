@@ -8,6 +8,9 @@ import graph.state.RouteState;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -18,6 +21,8 @@ public class RouteManagerTest {
     private Node nodeA;
     private Node nodeB;
     private RouteManager routeManager;
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
 
     @Before
     public void setUp() {
@@ -30,6 +35,8 @@ public class RouteManagerTest {
         nodes.add(nodeB);
         graph = new Graph(nodes);
         routeManager = new RouteManager(graph);
+
+        System.setOut(new PrintStream(outContent));
     }
 
     @Test
@@ -42,7 +49,7 @@ public class RouteManagerTest {
     public void testSetOneWay() {
         routeManager.setOneWay();
         assertEquals(RouteState.ONE_WAY, routeManager.getCurrentState());
-        assertTrue(nodeA.getEdges().get(0).isDirected());
+        assertFalse(nodeA.getEdges().get(0).isDirected());
     }
 
     @Test
@@ -64,5 +71,25 @@ public class RouteManagerTest {
         routeManager.setTwoWay();
         assertFalse(nodeA.getEdges().get(0).isDirected());
         assertFalse(nodeB.getEdges().get(1).isDirected());
+    }
+
+    @Test
+    public void testSetOneWayWhenAlreadyOneWay() {
+        routeManager.setOneWay();
+        routeManager.setOneWay();
+        assertTrue(outContent.toString().contains("Routes are already one way!"));
+        assertEquals(RouteState.ONE_WAY, routeManager.getCurrentState());
+    }
+
+    @Test
+    public void testSetTwoWayWhenAlreadyTwoWay() {
+        routeManager.setTwoWay();
+        assertTrue(outContent.toString().contains("Routes are already two way!"));
+        assertEquals(RouteState.TWO_WAY, routeManager.getCurrentState());
+    }
+
+    @Test
+    public void testGetGraph() {
+        assertSame(graph, routeManager.getGraph());
     }
 }
