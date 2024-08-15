@@ -34,7 +34,7 @@ public class GraphTest {
         nodes.add(nodeB);
         nodes.add(nodeC);
 
-        nodeC.setVisited(true);
+        nodeB.setVisited(true);
 
         graph = new Graph(nodes);
         trainStrategy = new TrainTravelStrategy(graph);
@@ -44,7 +44,7 @@ public class GraphTest {
     public void testBFS() {
         graph.bfs(nodeA);
         int numberOfEdges = nodeC.getDistance();
-        assertEquals(0, numberOfEdges * trainStrategy.getTrainUnitTime());
+        assertEquals(0, numberOfEdges);
     }
 
     @Test

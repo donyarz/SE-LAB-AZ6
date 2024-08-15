@@ -123,6 +123,8 @@ public class Main {
                     Node start = selectNodeByIndex(scanner, graph);
                     Node end = selectNodeByIndex(scanner, graph);
                     int trainTime = trainStrategy.calculateTravelTime(start, end);
+                    start.setDistance(0);
+                    end.setDistance(0);
                     System.out.println("Train travel time: " + trainTime);
                     if (trainTime == 0) {
                         System.out.println("It is not possible!");
@@ -133,6 +135,8 @@ public class Main {
                     start = selectNodeByIndex(scanner, graph);
                     end = selectNodeByIndex(scanner, graph);
                     int busTime = busStrategy.calculateTravelTime(start, end);
+                    start.setDistance(0);
+                    end.setDistance(0);
                     if (busTime == 0) {
                         System.out.println("It is not possible!");
                     }
@@ -143,7 +147,11 @@ public class Main {
                     start = selectNodeByIndex(scanner, graph);
                     end = selectNodeByIndex(scanner, graph);
                     trainTime = trainStrategy.calculateTravelTime(start, end);
+                    start.setDistance(0);
+                    end.setDistance(0);
                     busTime = busStrategy.calculateTravelTime(start, end);
+                    start.setDistance(0);
+                    end.setDistance(0);
                     System.out.println("Faster mode: " + (trainTime < busTime ? "Train" : "Bus"));
                     System.out.println("Faster mode time: " + (Math.min(trainTime, busTime)));
                     if (trainTime == 0 && busTime == 0) {
@@ -156,12 +164,17 @@ public class Main {
                     end = selectNodeByIndex(scanner, graph);
                     Node avoidCity = selectNodeByIndex(scanner, graph);
                     avoidCity.setVisited(true);
+                    start.setDistance(0);
+                    end.setDistance(0);
                     trainTime = trainStrategy.calculateTravelTime(start, end);
+                    avoidCity.setVisited(true);
+                    start.setDistance(0);
+                    end.setDistance(0);
                     busTime = busStrategy.calculateTravelTime(start, end);
                     if (trainTime == 0 && busTime == 0) {
                         System.out.println("It is not possible!");
                     } else {
-                        System.out.println("Faster mode: " + (trainTime < busTime ? "Go with Train" : "Go with bus Bus"));
+                        System.out.println("Faster mode: " + (trainTime < busTime ? "Go with Train: " + trainTime : "Go with Bus: " + busTime));
                     }
                     break;
                 case 5:

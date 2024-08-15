@@ -18,6 +18,7 @@ public class Node implements Comparable<Node> {
 
     public Node() {
         edges = new ArrayList<>();
+        visited = false;
     }
 
     public ArrayList<Pair<Node, Integer>> getAvailableWeightedNeighbors() {
