@@ -1,5 +1,6 @@
 package graph;
 
+import lombok.Setter;
 import org.javatuples.Pair;
 
 import lombok.Getter;
@@ -8,7 +9,8 @@ public class Edge {
     @Getter
     private final Pair<Node, Node> nodes;
     @Getter
-    private final boolean directed;
+    @Setter
+    private boolean directed;
     @Getter
     private final int weight;
 
