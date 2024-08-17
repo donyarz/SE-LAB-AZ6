@@ -1,15 +1,13 @@
-package MiniJava.semantic.symbol;
+package semantic.symbol;
 
-/**
- * Created by mohammad hosein on 6/28/2015.
- */
+public enum SymbolType {
+    Int(codeGenerator.varType.Int),
+    Bool(codeGenerator.varType.Bool),
+    ;
 
-public class Symbol {
-    public SymbolType type;
-    public int address;
+    public final codeGenerator.varType varType;
 
-    public Symbol(SymbolType type, int address) {
-        this.type = type;
-        this.address = address;
+    SymbolType(codeGenerator.varType varType) {
+        this.varType = varType;
     }
 }
