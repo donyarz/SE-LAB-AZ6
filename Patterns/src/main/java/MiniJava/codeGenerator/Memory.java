@@ -2,9 +2,6 @@ package MiniJava.codeGenerator;
 
 import java.util.ArrayList;
 
-/**
- * Created by mohammad hosein on 6/27/2015.
- */
 public class Memory {
     private ArrayList<_3AddressCode> codeBlock;
     private int lastTempIndex;
@@ -21,13 +18,18 @@ public class Memory {
     }
 
     public int getTemp() {
-        lastTempIndex += tempSize;
-        return lastTempIndex - tempSize;
+        return lastTempIndex;
     }
 
+    public void updateTempIndex() {
+        lastTempIndex += tempSize;
+    }
     public int getDateAddress() {
+        return lastDataAddress ;
+    }
+
+    public void updateDataAddress() {
         lastDataAddress += dataSize;
-        return lastDataAddress - dataSize;
     }
 
     public int saveMemory() {
