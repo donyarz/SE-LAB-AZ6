@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import MiniJava.Log.Log;
-import MiniJava.codeGenerator.CodeGenerator;
+import MiniJava.codeGenerator.CodeGeneratorFacade;
 
 import MiniJava.scanner.token.Token;
 
@@ -28,14 +28,14 @@ public class Parser {
         parsStack.push(currentAction.number);
     }
 
-    public void reduceAction(Action currentAction, Token lookAhead, ParseTable parseTable, CodeGenerator cg) {
+    public void reduceAction(Action currentAction, Token lookAhead, ParseTable parseTable, CodeGeneratorFacade cgf) {
         Rule rule = rules.get(currentAction.number);
         for (int i = 0; i < rule.RHS.size(); i++) {
             parsStack.pop();
         }
         parsStack.push(parseTable.getGotoTable(parsStack.peek(), rule.LHS));
         try {
-            cg.semanticFunction(rule.semanticAction, lookAhead);
+            cgf.semanticFunction(rule.semanticAction, lookAhead);
         } catch (Exception e) {
             Log.print("Code Generator Error");
         }
